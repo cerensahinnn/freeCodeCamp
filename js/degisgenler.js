@@ -237,4 +237,118 @@ console.log(nextInLine(testArr, 6));
 console.log("After" + JSON.stringify(testArr));
 
 // Boolean values 
+function welcomeTheBoolean() {
+    return true;
+}
+
+// use conditional logic with if statement
+
+function ourTrueOrFalse (isItTrue) {
+    if (isItTrue) {
+        return "yes, it is true";
+    }
+    return "no, it is false";
+}
+
+console.log(ourTrueOrFalse(true))
+
+function testEqual(val){
+    if (val == 12) {  // if eğer anlamı kattığı için == ile sorguluyoruz, = tanımlamak demektir. 
+        return "Equal";
+    }
+    return "not equal";
+} 
+console.log(testEqual(10)) 
+
+function testStrict(val) {
+    if (val === 3){ // 3 
+        return "equal"
+    }
+    return "not equal"
+}
+console.log(testStrict(3))
+
+/*  === bu sayı ve yazı arasında T(YPES) kımsına dikkat eder. 
+3 === 3   this means true, bir birine eşittir 
+3 === '3'    this means false, ama type'ları farklı olduğu için eşittir diyemeyiz.
+*/
+
+function compareEquality(a, b) {
+    if (a === b) { // === ile yazıldığında output = not equal olur, girilen değerlerin biri number biri string.
+        return "equal"; // eğer if içindeki == olsaydı output = equal olurdu. değerlerin ikisi de 10 demek oluyor.
+    }
+    return "not equal";
+}
+console.log(compareEquality(10, "10"))
+
+function testNotEqual(val) {
+    if (val != 99) { // != means that if is not qual to ... 
+        return "equal"; 
+    }
+    return "not equal"; // val 99'a eşitse not equal olur. 
+}
+console.log(testNotEqual(99))
+
+
+function testStrictNotEqual(val) {
+    if (val !== 99) { // != means that if is not qual to ... 
+        return "equal"; 
+    }
+    return "not equal"; // val 99'a sayısal eşitse not equal olur. yani convert yapmaz ve string type kabul etmez 
+}
+console.log(testStrictNotEqual("99")) // output equal çıkar ( eşit değilse equal olucaktı zaten) çünkü string type'ı kabul etmez
+
+function testGreaterThan(val) {
+    if (val > 100) {  // eğer büyükse
+        return "Over 100"; 
+    }
+    if (val < 10 ) { // eğer küçükse
+        return "Under 10"
+    }
+    return "Between 10-100"; 
+}
+console.log(testGreaterThan(55))
+
+function testGreaterOrEqual(val) {
+    if (val >= 44) {  // eğer büyük ve eşitse
+        return "44 or Over"; 
+    }
+    if (val <= 16 ) { // eğer küçük ve eşitse
+        return "16 or Under"
+    }
+    return "between 16-44"; 
+}
+console.log(testGreaterOrEqual(33))
+
+// if içindeki AND operator
+function testLogicalAnd(val) {
+    if (val >= 16 && val <= 55) { // &&  : " ve (AND)" anlamında gelir 
+        return "It could be Charles, Lewis, Max or Carlos. "; 
+    }
+    return "Other drivers"; 
+}
+console.log(testLogicalAnd(1))
+
+// if içindeki OR operator
+function testLogicalOr(val) {
+    if (val < 16 || val > 55) { // ||  : " ya da (OR)" anlamında gelir 
+        return "Drivers"; 
+    }
+    return "It could be Charles, Lewis, Max or Carlos. "; 
+}
+console.log(testLogicalOr(44))
+
+function testElse(val) {
+    var result = ""; 
+    if (val > 5) { // ||  : " ya da (OR)" anlamında gelir 
+        result = "bigger than 5 ";
+    } else {
+        result = "5 or smaller";
+    }
+     return result;  
+}
+console.log(testElse(44))
+
+
+
 
