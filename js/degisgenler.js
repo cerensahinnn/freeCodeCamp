@@ -340,7 +340,7 @@ console.log(testLogicalOr(44))
 
 function testElse(val) {
     var result = ""; 
-    if (val > 5) { // ||  : " ya da (OR)" anlamında gelir 
+    if (val > 5) { 
         result = "bigger than 5 ";
     } else {
         result = "5 or smaller";
@@ -349,6 +349,172 @@ function testElse(val) {
 }
 console.log(testElse(44))
 
+function testElseIf(val) {
+    if (val > 10) { // ||  : " ya da (OR)" anlamında gelir 
+        return "bigger than 10 ";
+    } else if(val < 5 ) {
+        return "smaller than 5";
+    } else { 
+        return "between 5 or 10"
+    } 
+}
+console.log(testElseIf(44))
 
 
+// Order'ın önemi!!!
+function orderMyLogic(val) {
+    if (val < 5) {  // eğer sayısının 5ten küçükse ve farklı bir sonuç göstermesini istiyorsak ilk sıraya yazmalıyız.
+        return "less than 5"
+    }
+    else if ( val < 10) { // örn: 3 olursa 5ten de küçüktür 10dan da. bu yüzden sıralama önemli.
+        return "less than 10" // "val < 10" komutunu ilk sıraya yazsaydık "less than 5" sonucunu göremezdik !!!!
+    }
+    else {
+        return "greater than or equal to 10 "
+    }
+}
+console.log(orderMyLogic(4))
+
+function testSize(num) {
+    if (num < 5 ){
+        return "Tiny"
+    } else if (num < 10){
+        return "Small"
+    } else if (num < 15){
+        return "Medium"
+    } else if (num < 20){
+        return "Large"
+    }  else { // (num >= 20) olduğu durumlarda
+        return "Huge"
+    } 
+}
+console.log(testSize(16))
+
+
+// Golf code, Par= bir deliğin, raundun ya da turnuvanın tamamlanması için yapılması gereken vuruş sayısıdır. strokes=vuruş 
+var names = ["Hole-in-one!", "Eagle", "Birdie", "Par", "Bogey", "Double Bogey", "Go Home!"]
+function golfScore(par, strokes) {
+    if (strokes == 1){
+        return names[0]
+    } else if (strokes <= par - 2) {
+        return names[1]
+    } else if (strokes == par - 1) {
+        return names[2]
+    } else if (strokes == par){
+        return names[3]
+    } else if (strokes == par + 1){
+        return names[4]
+    } else if (strokes == par + 2){
+        return names[5]
+    } else (strokes >= par + 3);
+        return names[6]
+}
+console.log(golfScore(1,1))
+
+// Switch statement: case'ler ile çalışır. 
+function caseInSwitch(val) {
+    var answer ="";
+    switch (val){
+        case 1:
+            answer = "alpha";
+            break; // buradaki "break" case 1 kullanılacaksa kullan ve switchTen çık anlamına gelir. 
+        case 2:
+            answer = "beta";
+            break;
+        case 3: 
+            answer = "gamma";
+            break;
+        case 4:
+            answer = "delta";
+            break;
+    }
+    return answer; // case'ler dışında değer girildiğinde answer boş gözükecek.(en başta öyle tanımlanmış)
+}
+console.log(caseInSwitch(4))
+
+function switchOfStuff(val) {
+    var answer ="";
+    switch (val){
+        case "a": // tırnak işareti ile string değer girmiş olduk 
+            answer = "apple";
+            break; 
+        case "b":    
+            answer = "bird";
+            break;
+        case "c": 
+            answer = "cat";
+            break;
+        case "d":
+            answer = "dog";
+            break;
+        default: // case'ler dışında bir girdi olursa ne yapması gerektiği söylüyor, aynı "else" gibi.
+            answer = "stuff";
+            break;
+    }
+    return answer; 
+}
+console.log(switchOfStuff("g")) // default olmasaydı, number type girdiğimde (örn:2), boş gözükecekti.(başta öyle tanımlanmış)
+
+function sequentialSizes(val) {
+    var answer = "";
+    switch(val) {
+        case 1:
+        case 2:
+        case 3: // bu şekilde ccase 1 2 3 hepsi break'e gelene kadar aynı şeyi ifade ediyor. 
+            answer = "Low";
+            break;
+        case 4:
+        case 5:
+        case 6: // aynı şekilde case 4 5 6 da break'e gelene kadar aynı şeyi ifade ediyor.
+            answer = "Mid";
+            break;
+        case 7:
+        case 8:
+        case 9: // aynı şekilde ne zaman case 7 olsa 8 ve 9 a giriyor break 9. sonunda olduğunda cevap oradaki oluyor.
+            answer = "High";
+            break;
+    }
+    return answer;
+}
+console.log(sequentialSizes(4))
+
+// alıştırma: if else statement'ı switch statement yap
+function chainToSwitch (val){
+    var answer = "";
+    switch (val) {
+        case "bob":
+            answer = "Marley";
+            break;
+        case "42":
+            answer = "The answer";
+            break;
+        case "1":
+            answer = "There is no #1";
+            break;
+        case "99":
+            answer = "Missed me by this much";
+            break;
+        case "7":
+            answer = "Ate nine";
+            break;
+    }
+    return answer;
+}
+console.log(chainToSwitch("bob"))
+
+// alıştırma: Returning Boolean values from functions (if else ile yazılanı boolean yapıcaz.)
+// if else ile yapılan true-false
+function isLess(a,b) {
+    if (a < b) {
+        return true;
+    } else {
+        return false;
+    }
+}
+console.log(isLess(10,20)) // output= true
+
+function isLessThis(a,b) {
+    return (a < b); // girilen değerlerle beraber şartımızı sağlıyorsa true gösterir, değilse false. 
+}
+console.log(isLessThis(20,10)) // output= false
 
