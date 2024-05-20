@@ -518,3 +518,82 @@ function isLessThis(a,b) {
 }
 console.log(isLessThis(20,10)) // output= false
 
+function abTest(a,b) {
+    if (a < 0 || b < 0){
+    return undefined; 
+    }
+    return Math.round(Math.pow(Math.sqrt(a) + Math.sqrt(b), 2));
+}
+console.log(abTest(2,5))
+
+// Blackjack card counting function örneği
+var count = 0 ;
+function cc(card) {
+    switch (card) {
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+            count++;
+            break;
+        case 10:
+        case "J":
+        case "Q":
+        case "K":
+        case "A":
+            count--;
+            break;
+    }
+    var holdbet = "Hold"
+    if (count > 0) {
+        holdbet = "Bet"
+    } 
+    return count + " " + holdbet
+}
+
+console.log(cc("A"))
+
+// Object: similiar to arrays except that instead of using indexes to access data, you use properties. 
+var ourDog = {
+        "name" : "dobby", // bunların her biri özellik properties) oluyor. 
+        "legs" : "4",
+        "tails" : "1",
+        "friends" : ["everything!"]
+};
+
+// There are too many ways to access a property on an object.
+// dot notation
+var testObj = {
+    "hat" : "Mercedes",
+    "shirt" : "Ferrari",
+    "shoes" : "Nike"
+};
+var hatValue = testObj.hat;
+var shirtValue = testObj.shirt;
+console.log(hatValue)
+console.log(shirtValue)
+
+// bracket notation
+var testFood = {
+    "Dish" : "Sushi",
+    "Ingredients" : "Fish",
+    "Drink" : "Sparkling water"
+};
+var dishPrefer = testFood["Dish"];
+var ingredients = testFood["Ingredients"];
+console.log(dishPrefer)
+console.log(ingredients)
+
+// Accessing object properties with variables 
+var testObjc = {
+    16 : "Charles",
+    33 : "Max",
+    44 : "Lewis"
+};
+var playerNumber = 16;
+var player = testObjc[playerNumber]; // istediğim property'yi bir variable ile çağırdım.
+console.log(playerNumber)
+console.log(player) // player'ı çağırdım ve testObjc içindeki bir özelliği çağırmış oldum.
+
+
