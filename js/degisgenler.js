@@ -597,3 +597,426 @@ console.log(playerNumber)
 console.log(player) // player'ı çağırdım ve testObjc içindeki bir özelliği çağırmış oldum.
 
 
+// using objets for lookup: burda switch case ile tek tek yapılabilirdi ama properties belirlemek de işe yarıyor.
+function phoneticLookup (val) {
+    var result = "";
+    var lookup = {
+        "Team" : "Redbull",
+        "Principal" : "Christan Horner",
+        "Sponspor" : "Bybit",
+        "Driver 1" : "Max Verstappen",
+        "Driver 2" : "Sergio Perez"
+    }
+    result = lookup[val];
+    return result;
+}
+console.log(phoneticLookup("Principal"))
+
+// .hasOwnProperty method 
+var yourObj = {
+    gift : "car",
+    pet : "dog",
+    city : "miami"
+};
+function checkObj(checkProp) { // propları kastediyor, gift , pet ve city.
+    if (yourObj.hasOwnProperty(checkProp)){ // .hasOwnProperty komutu Bir nesnenin belirtilen adda bir özelliğe sahip olup olmadığını belirler. Bir (parameter) özellik adı.
+        return yourObj[checkProp];
+    } else {
+        return "not found"
+    }
+}
+console.log(checkObj("car")) 
+
+// Manipulating complex objects
+var myMusic = [ 
+    {
+        "artist" : "Ceren Şahin",
+        "style" : "Pop",
+        "Format" : [ 
+            "MP3",
+            "spotify"
+        ],
+        "gold" : true 
+    },
+    {
+        "artist" : "Anıl Karaçay",
+        "style" : "Rap",
+        "Format" : [ 
+            "CD",
+            "Youtube",
+            "spotify"
+        ],
+        "gold" : true 
+    }
+];
+console.log("Artist 1:", myMusic[0].artist); // console ile yazdırırken + işareti yerine , kullandım.
+console.log("Artist 2:", myMusic[1].artist);
+
+// accessing nested objects(iç içe geçmiş nesneler)
+var inMyPaddock = {
+    "paddock"  : { 
+        "Team" : {
+            "Team Name" : "Redbull Racing", // "Team Name" 2 kelime yani boşluklu olduğu için [] içinde çağırılır.
+            "Principal Name" : "Christan Horner", 
+        },
+        "Sponspor" : { 
+            "Main" : "Bybit"
+        }
+    }
+}
+console.log("Formula 1:", inMyPaddock.paddock.Team["Team Name"]); // . ile tek tek iç kısma geçtik,en son[] ile çağırdk.
+
+// accessing nested arrays
+var inFormula = [ 
+    {
+        "paddock" : "teams", 
+        "list" : [ 
+            "Ferrari",
+            "Mercedes",
+            "Mclaren" 
+        ], 
+    },
+    {
+        "paddock" : "Drivers",
+        "list" : [ 
+            "Carlos Sainz",
+            "Lando Norris",
+            "Charles Leclerc"
+        ],
+    }
+];
+console.log("Team is", inFormula[0].list[0]); 
+
+// record collection 
+var collection = {
+    "2548" : {
+        "Ferrari" : "red",
+        "Mercedes" : "black",
+        "Mclaren" : ["orange", "white"] 
+    },
+    "4321" : {
+        "Ferrari" : "Carlos Sainz",
+        "Mercedes": "Lewis Hamilton",
+        "Mclaren": ["Lando Norris", "Oscar Piastri"]
+    }
+}
+var collectionCopy = JSON.parse(JSON.stringify(collection));
+function updateRecords(id,prop,value) {
+    if (value === "") {
+        delete collection[id][prop]; 
+       } else if (prop == "tracks") {  // tracks burada parçalı olan property anlamına geliyor. 
+        collection[id][prop] = collection[id][prop] || [];
+        collection[id][prop].push(value);
+       } else {
+        collection[id][prop] = value;
+       }
+       return collection;
+}
+console.log(updateRecords(2548 , "Ferrari" , "blue")); // else çalıştı ve çıktı verdi
+console.log(updateRecords(4321, "Mclaren", "LANDO")); // else if çalıştı, yanı parçalı olan property çağrıldı.
+
+// WHILE: i ile array yazdırma 
+var testiArray =[];
+var i = 0;
+while ( i < 5 ) {
+    testiArray.push(i);
+    i++;
+}
+console.log(testiArray);
+
+// FOR: i ile array yazdırma
+var testiArray2 = [] ;
+for ( var i = 0; i < 8; i++ ) {
+    testiArray2.push(i);
+}
+console.log(testiArray2)
+
+// çift sayılardan oluşan array yazdırma
+var testiArray3 = [] ;
+for ( var i = 0 ; i < 8 ; i+=2 ) {
+    testiArray3.push(i);
+}
+console.log(testiArray3)
+
+// geriye doğru teker teker sayma 
+var testiArray4 = [] ;
+for ( var i = 10 ; i > 0 ; i-- ) {
+    testiArray4.push(i);
+}
+console.log(testiArray4)
+
+var testiArray5 = [9, 10, 11, 12] ;
+var ourTotal = 0 ;
+for ( var i = 0; i < testiArray5.length ; i++ ) {
+    ourTotal += testiArray5[i];
+}
+console.log(ourTotal);
+console.log(testiArray5);
+
+
+// iç içe arrayler ile işlemler
+function multiplyAll(arr) {
+    var products = 1;
+
+    for ( var i = 0; i < arr.length; i++ ) {
+        for (var j = 0; j < arr[i].length; j++) {
+            products *= arr[i][j];
+        }
+    } return products;
+}
+var products = multiplyAll([[1,2],[3,4],[5,6,7]])
+console.log(products);
+
+// do while loops: ilk önce yapar sonra şarta uyar
+var testiArray6 = [] ;
+var i = 10;
+
+do {
+    testiArray6.push(i); // bunları yaptı
+    i++;
+} while (i < 5)  // şarta baktı ve sağlamadığı için daha fazla ilerlemedi
+console.log(testiArray6);
+console.log("i after: ", i);
+
+// generate random fractions : .random, kesirli random bir sayı üretir 0 ile 1 arasında.
+function randomFraction () { // math.random can never be 1, it can be 0. 
+    return Math.random ();
+}
+console.log(randomFraction());
+
+// rnadom number between a and b ==> // .floor en yakın tam sayıya yuvarlar
+var randomNumberBetween0and19 = Math.floor(Math.random() * 20); // 20 ile çarpmak demek 0 ile 20 arasında olur 
+// ancak 20 olamaz çünkü math.random 1 olamaayacağından 20 de olmaz.  
+function randomWholeNumber () { 
+    return Math.floor(Math.random() * 10); // sayı 0 ile 10 arasında olur 
+}
+console.log(randomWholeNumber());
+console.log(randomNumberBetween0and19);
+
+// generate random whole number within a range
+function randomRange(myMin, myMax) {
+    return Math.floor(Math.random() * (myMax - myMin + 1)) + myMin;
+}
+var myRandom = randomRange(3,7);
+console.log(myRandom); 
+
+//use the parseInt function : string alıp integer döndürüyor. eğer yazıyı sayıya çeviremezse NaN gözükür(not a num).
+function convertIntoInteger (str) {
+    return parseInt(str);
+}
+console.log("55");
+
+// use the parseInt function with radix => radix sayısının base'ini belirler, binary(2) or decimal(10) gibi. 
+function convertIntoInteger2 (str) {
+    return parseInt(str , 2) // binary (2) dedik.
+}
+console.log(convertIntoInteger2("10011"));
+
+// use the conditional (tarnary) operator (üçlü operator kullanmak)
+// condition ? statement-if-true : statement-if-false
+function checkEqual (a , b) {
+    return  a === b ? true : false ;
+    // return a === b;
+}
+
+ console.log(checkEqual(1,2));
+
+ // use the multiple conditional (tarnary) operator (birden fazla 3lü operator kullanırken)
+ function checkSign (num) {
+    return  num > 0 ? "positive" : num < 0 ? "negative" : "zero";
+    // return a === b;
+}
+
+ console.log(checkSign(0)); 
+
+ // difference between the var and let keywords
+var catName = "Neela"; 
+var quote;
+var catName = "niloş" 
+console.log(catName) // var kullanarak istersem bir variable'a 2 defa değer atayabilirim.En son verilen değeri gösterir.
+
+let dogName = "Trex"; 
+let quote1;
+dogName = "Flash" // let kullanmadan tanımlama yaparsam code çalışır. 
+console.log(dogName) // let kullanarak 2 defa atama yapamadım variable'a. 
+
+function catTalk() {
+    "use strict"; // bu eğer kodda hata varsa bunu bul demek.
+    catName = "Olive";
+    quote = catName + " says meow";
+    return quote
+}
+console.log(catTalk());
+
+
+function checkScope(){
+let i = "function scope"; // var kullanmış olsaydık aşağıda if'indeki yeni i değeri dönecekti.
+    if (true) {
+        let i = "Block scope"; // let kullanmamızla beraber sadece if içinde tanımlamış olduk.
+        console.log("Block Scope is : " + i);
+    }
+    console.log("Fucntion scope is : " + i);
+    return i
+}
+console.log(checkScope()); 
+
+function printManyTimes (str) {
+    "use strict";
+    const SENTENCE = str + " is cool." // const kullandığımız için değiştiremeyiz, hata verir
+    for (let i = 0; i < str.length ; i++ ){
+        console.log(SENTENCE)
+    }
+}
+console.log(printManyTimes("Anıl"))
+
+const s = [2,5,7]
+function editInPlace () {
+    // s = [7, 2,5] diye yazıp direkt değiştiremiyoruz, const izin vermiyor 
+    s [0] = 7; // şeklinde tek tek elemanları değiştirebiliriz.
+    s [1] = 2;
+    s [2] = 5;
+    return s
+}
+console.log(editInPlace());
+
+// prevent object mutation 
+function freezeObj () {
+    "use strict";
+    const MATH_CONSTANT = {
+        PI : 3.14 // math_constant için property verdil
+    };
+    Object.freeze(MATH_CONSTANT); // bununla birlikte dediğimiz variable'ı kitledik ve sonrasında değişmeyeceğini garantiledik.
+    try {
+        MATH_CONSTANT.PI = 99;
+    } catch ( ex ){
+        console.log(ex);
+    }
+    return MATH_CONSTANT.PI;
+}
+const PI = freezeObj();
+console.log(PI)
+
+
+/* şimdi yazacaklarımız bu alttakinin kısa versiyonu.
+var magic = function () {
+    return new date();
+}; */
+const magic = () => new date(); // => arrow function to write concise and anonymousfunction
+
+// .concat = birleştirmek için kullanılıyor, bununla beraber bir örnek verelim. 
+var myConcat = (arr1,arr2) => arr1.concat(arr2);
+console.log(myConcat([1,2],[3,4,5])); // output = [1,2,3,4,5]
+
+// we want to compute the square of only the positive integers in the array.
+const realNumberArray = [4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2]
+const squareList = (arr)/* func içi */=> { /* func komutları */
+    const squareInteger = arr.filter(num => Number.isInteger(num) && num > 0).map(x => x * x); // burdaki x: every element from the array that's being passed to it.
+    return squareInteger;
+} 
+const squareInteger = squareList(realNumberArray);
+console.log(squareInteger);
+
+const increment = (function () {
+    return function increment (number ,value = 1){
+        return number + value;
+    };
+}) ();
+console.log(increment(5,2));
+console.log(increment (5));
+
+// rest operator = ... => convert everythin thats passed in into one array called args
+const sum1 = (function () {
+    return function sum1 (...args){ // x,y,z yazmak yerine ...args yazdık ve 
+        // const args = [x,y,z]; bu satıra gerek kalmadı
+        return args.reduce((a,b) => a + b, 0)
+    };
+}) ();
+console.log(sum1(1,2,3,4)); // we can have any number of arguments 
+
+// spread poperator= [...array]
+const arr1 = ['jun', 'july', 'august', 'september'];
+let arr2;
+(function () {
+    arr2 = [...arr1]; // spread operator ile arr2 yi arr1deki gibi yaptık
+    arr1[0] = 'potato' // spread operator sayesinde burda değişiklik arr2'yi etkilemeyecek.
+})();
+console.log(arr1);
+console.log(arr2);
+
+/* functionun parantez içinde başlaması yani
+(function (){..})(); 
+    şeklinde bir yazımının olması IIFE'den kaynaklanıyor,Bu kısımda ise anonim bir fonksiyon tanımlanıyor ve hemen ardından ( ) ile çağrılıyor. İşte bu kısım IIFE'dir. IIFE'nin amacı, kapsama (scope) seviyesinde izole bir alan yaratmaktır. Yani bu fonksiyon içindeki değişkenler ve işlemler, dışarıdaki diğer kodlar ile karışmaz.
+
+    ~~~~~* IIFE'nin Kullanım Nedenleri *~~~~
+    Değişken Kapsamını İzole Etmek:
+    IIFE kullanarak, o fonksiyon içinde tanımlanan değişkenler dışarıdaki global veya başka kapsamlar ile karışmaz. Bu, özellikle büyük kod tabanlarında veya modüler yapıda kod yazarken faydalıdır.
+
+    Anında Fonksiyon Çalıştırma:
+    Bir fonksiyonun hemen tanımlandığı anda çalıştırılması gerekiyorsa IIFE kullanılır. Bu, başlangıçta bazı ayarlamalar yapmak veya bir dizi işlem gerçekleştirmek için yaygın bir yöntemdir.
+*/
+
+// destructring assignment 
+var voxel = { x: 3.6 , y: 7.4, z: 6.54}
+var x = voxel.x;
+var y = voxel.y;
+var z = voxel.z;
+//tek tek var ile x y z için değer atamanın kısa yolu aşağıdaki (satır 964)
+const {x: ab, y: bc, z: cd} = voxel ; // a=3.6, b=7.4, c=6.54
+ 
+//temperature 
+const AVG_TEMPERATURES = {
+    today: 26,
+    tomorrow: 32
+};
+
+function getTempOfTmrw(avgTemperatures) {
+    "use strict";
+    const { tomorrow: tempOfTomorrow } = avgTemperatures; // bu satırda tempOfTomorrow variable'ına değer ataması yaptım, tomorrow neye eşitse o da ona eşit oldu. 
+    return tempOfTomorrow
+}
+
+console.log(getTempOfTmrw (AVG_TEMPERATURES));
+
+const [k,l, , m] = [1,2,3,4,5,6];
+console.log(k,l,m); // output = 1 2 4 olmuş
+
+let a1 = 8, b1 = 6;
+(() => {
+    "use strict"
+    [a1,b1] = [b1,a1];
+})();
+console.log(a1)
+console.log(b1);
+
+const source = [1,2,3,4,5,6,7,8,9,10]
+function removeFirstTwo (list) {
+    const [ , , ...arr] = list;
+    return arr;
+}
+const arr = removeFirstTwo(source);
+console.log(arr);
+console.log(source);
+
+// create string using template literals 
+const person = {
+    name: "Lewis Hamilton",
+    age: "39"
+}
+const greeting = `This is the world drivers champion, ${person.name}! He is ${person.age} years old.`;
+console.log(greeting);
+
+// devamında bir yer var, videoda 3.08.00 a bak.
+
+
+// bir object functiona sahip olabilir
+const bicycle = {
+    gear: 2,
+    setGear (newGear){ // setGear : function (newGear){ =>>> böyle demek yerine bu şekilde yazdık
+    "use strict";
+    this.gear = newGear;
+    }
+};
+bicycle.setGear(3)
+console.log(bicycle.gear)
+
+// use class syntax to define a constructure function
